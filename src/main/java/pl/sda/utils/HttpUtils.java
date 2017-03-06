@@ -13,7 +13,7 @@ public class HttpUtils {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 
         String line = null;
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             buffer.append(line);
         }
 

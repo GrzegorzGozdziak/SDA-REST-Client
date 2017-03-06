@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         List<String> usersIds = new ArrayList<>();
-        while(true) {
+        while (true) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("1. Add user");
             System.out.println("2. Show user ids list");
@@ -22,7 +22,7 @@ public class Main {
             Integer choice = Integer.parseInt(choiceRaw);
 
 
-            switch (choice){
+            switch (choice) {
                 case 1:
                     System.out.println("Enter Your name:");
                     String name = scanner.nextLine();
@@ -54,15 +54,10 @@ public class Main {
                 case 2:
                     System.out.println(usersIds.toString());
                     break;
-                default: break;
+                default:
+                    break;
 
             }
-
-
-
-
-
-
         }
     }
 }
