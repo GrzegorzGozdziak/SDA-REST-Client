@@ -1,8 +1,10 @@
 package pl.sda.sdaPostman;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import pl.sda.requests.CreateUserRequest;
-import pl.sda.requests.CreateUserResponse;
+import pl.sda.messages.CreateUserRequest;
+import pl.sda.messages.CreateUserResponse;
+import pl.sda.messages.GetUserResponse;
+import pl.sda.utils.HttpUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,13 +12,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    public static final String URL = "http://localhost:8081/sda-json/json";
+
     public static void main(String[] args) throws IOException {
 
         List<String> usersIds = new ArrayList<>();
         while (true) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("1. Add user");
-            System.out.println("2. Show user ids list");
+            System.out.println("2. Show user id's list");
+            System.out.println("3. Show users list");
 
             String choiceRaw = scanner.nextLine();
             Integer choice = Integer.parseInt(choiceRaw);
@@ -41,18 +46,22 @@ public class Main {
                     ObjectMapper mapper = new ObjectMapper();
                     String request = mapper.writeValueAsString(createUserRequest);
 
-
-//                    System.out.println(request.toString());
-                    String createUserResponse = Sender.createUser("http://localhost:8081/sda-json/json", request);
+                    String createUserResponse = Sender.createUser(URL, request);
 
                     CreateUserResponse response = mapper.readValue(createUserResponse, CreateUserResponse.class);
-//                    System.out.println(response.getId());
                     usersIds.add(response.getId());
 
                     break;
 
                 case 2:
                     System.out.println(usersIds.toString());
+                    break;
+                case 3:
+                    List<String> getUserResponses = new ArrayList<>();
+                    for (String id : usersIds) {
+                        getUserResponses.add(Sender.getUser(URL, id));
+                    }
+                    System.out.println(getUserResponses.toString());
                     break;
                 default:
                     break;

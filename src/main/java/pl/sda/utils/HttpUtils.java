@@ -1,7 +1,6 @@
 package pl.sda.utils;
 
 import org.apache.http.HttpResponse;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,4 +18,6 @@ public class HttpUtils {
 
         return buffer.toString();
     }
+
+
 }
