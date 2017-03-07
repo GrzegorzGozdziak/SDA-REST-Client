@@ -2,7 +2,7 @@ package pl.sda.messages;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-@JsonSerialize
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class CreateUserRequest {
     private String login;
     private String name;
